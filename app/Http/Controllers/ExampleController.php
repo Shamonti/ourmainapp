@@ -18,7 +18,7 @@ class ExampleController extends Controller
         return view('homepage', ['allAnimals' => $animals, 'name' => $ourName, 'catname' => 'Meowsalot']);
     }
 
-    public function aboutpage()
+    public function aboutPage()
     {
         return view('single-post');
     }
