@@ -26,9 +26,9 @@ class UserController extends Controller
 
         if (auth()->attempt(['username' => $incomingFields['loginusername'], 'password' => $incomingFields['loginpassword']])) {
             $request->session()->regenerate();
-            return 'Congrats!!';
+            return 'Congrats!!!';
         } else {
-            return 'Please try again.';
+            return 'Sorry';
         }
     }
 
