@@ -34,10 +34,6 @@ class PostController extends Controller
 
     public function showCreateForm(Request $request)
     {
-        if (auth()->check()) {
-            return view('create-post');
-        } else {
-            return view('homepage');
-        }
+        return view('create-post');
     }
 }
