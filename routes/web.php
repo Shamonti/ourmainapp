@@ -25,7 +25,11 @@ Route::post('/logout', [UserController::class, "logout"])->middleware('mustBeLog
 Route::get('/manage-avatar', [UserController::class, "showAvatarForm"])->middleware('mustBeLoggedIn');
 Route::post('/manage-avatar', [UserController::class, "storeAvatar"])->middleware('mustBeLoggedIn');
 
-//Posts related routes
+//Follow related routes
+Route::post('/create-follow/{user:username}', [FollowController::class, 'createFollow'])->middleware('mustBeLoggedIn');
+Route::post('/remove-follow/{user:username}', [FollowController::class, 'removeFollow'])->middleware('mustBeLoggedIn');
+
+//Blog Posts related routes
 Route::get('/create-post', [PostController::class, "showCreateForm"])->middleware('mustBeLoggedIn');
 Route::post('/create-post', [PostController::class, "storeNewPost"])->middleware('mustBeLoggedIn');
 Route::get('/post/{post}', [PostController::class, "viewSinglePost"]);
@@ -35,12 +39,8 @@ Route::put('/post/{post}', [PostController::class, "actuallyEdit"])->middleware(
 
 //Profile related routes
 Route::get('/profile/{user:username}', [UserController::class, "profile"]);
-
-Route::get('/adminOnly', function () {
-  return "You are allowed to view this page.";
-})->middleware('can:visitAdminPages');
-
-
-//Follow related routes
-Route::post('/create-follow/{user:username}', [FollowController::class, 'createFollow'])->middleware('mustBeLoggedIn');
-Route::post('/remove-follow/{user:username}', [FollowController::class, 'removeFollow'])->middleware('mustBeLoggedIn');
+// Route::get('/adminOnly', function () {
+//   return "You are allowed to view this page.";
+// })->middleware('can:visitAdminPages');
+Route::get('/profile/{user:username}/followers', [UserController::class, "profileFollowers"]);
+Route::get('/profile/{user:username}/following', [UserController::class, "profileFollowing"]);
